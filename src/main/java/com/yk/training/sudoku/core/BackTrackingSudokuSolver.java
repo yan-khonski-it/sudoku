@@ -99,7 +99,7 @@ public class BackTrackingSudokuSolver {
         return ZERO;
     }
 
-    private int getNextPossibleValue(final Set<Integer> excludedValues) {
+    protected int getNextPossibleValue(final Set<Integer> excludedValues) {
         for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
             if (!excludedValues.contains(i)) {
                 sudoku[currentRow][currentColumn] = i;

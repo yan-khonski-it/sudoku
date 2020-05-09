@@ -16,7 +16,7 @@ public class SudokuUtils {
     public static int countNonZeroElementsInRow(final int[][] matrix, final int row) {
         int counter = 0;
         for (int j = 0; j < SUDOKU_SIZE; j++) {
-            if (matrix[row][j] == ZERO) {
+            if (matrix[row][j] != ZERO) {
                 counter++;
             }
         }
@@ -27,7 +27,7 @@ public class SudokuUtils {
     public static int countNonZeroElementsInColumn(final int[][] matrix, final int column) {
         int counter = 0;
         for (int i = 0; i < SUDOKU_SIZE; i++) {
-            if (matrix[i][column] == ZERO) {
+            if (matrix[i][column] != ZERO) {
                 counter++;
             }
         }
@@ -45,7 +45,7 @@ public class SudokuUtils {
 
         for (int i = blockStartRow; i < iEnd; i++) {
             for (int j = 0; j < jEnd; j++) {
-                if (matrix[i][j] == ZERO) {
+                if (matrix[i][j] != ZERO) {
                     counter++;
                 }
             }
