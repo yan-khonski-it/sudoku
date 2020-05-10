@@ -12,6 +12,8 @@ import static com.yk.training.sudoku.core.SudokuValidator.SUDOKU_SIZE;
  * Improved version of {@link BackTrackingSudokuSolver}.
  * Before performing each step,
  * {@link BackTrackingSudokuSolver#navigateToZero()} returns the square that is the best to fill.
+ *
+ * Unfortunately, this solution works faster for only sudoku with many zeros.
  */
 public class BackTrackingWeightedSudokuSolver extends BackTrackingSudokuSolver {
 
@@ -71,47 +73,6 @@ public class BackTrackingWeightedSudokuSolver extends BackTrackingSudokuSolver {
         currentColumn = topLocation.column;
 
         return false;
-    }
-
-    @Override
-    protected int getNextPossibleValue() {
-        final Set<Integer> nonZeros = new HashSet<>();
-
-        for (int j = 0; j < SUDOKU_SIZE; j++) {
-            if (sudoku[currentRow][j] != ZERO) {
-                nonZeros.add(sudoku[currentRow][j]);
-            }
-        }
-
-        for (int i = 0; i < SUDOKU_SIZE; i++) {
-            if (sudoku[i][currentColumn] != ZERO) {
-                nonZeros.add(sudoku[i][currentColumn]);
-            }
-        }
-
-        // Collect elements from current block.
-        int blockStartRow = (currentRow / BLOCK_SIZE) * BLOCK_SIZE;
-        int blockStartColumn = (currentColumn / BLOCK_SIZE) * BLOCK_SIZE;
-
-        final int iEnd = blockStartRow + BLOCK_SIZE;
-        final int jEnd = blockStartColumn + BLOCK_SIZE;
-
-        for (int i = blockStartRow; i < iEnd; i++) {
-            for (int j = blockStartColumn; j < jEnd; j++) {
-                if (sudoku[i][j] != ZERO) {
-                    nonZeros.add(sudoku[i][j]);
-                }
-            }
-        }
-
-        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
-            if (!nonZeros.contains(i)) {
-                sudoku[currentRow][currentColumn] = i;
-                return i;
-            }
-        }
-
-        return ZERO;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.yk.training.sudoku.core;
 
+import com.yk.training.sudoku.utils.MatrixUtils;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -100,7 +102,7 @@ public class SudokuValidator {
     /**
      * @return {@code true} if elements from given row, column, block are unique.
      */
-    public static boolean nonZeroElementsInRowColumnBlockUnique(final int[][] sudoku,final int row, final int column) {
+    public static boolean nonZeroElementsInRowColumnBlockUnique(final int[][] sudoku, final int row, final int column) {
         if (!nonZeroElementsInRowUnique(sudoku, row)) {
             return false;
         }

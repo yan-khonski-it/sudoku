@@ -13,7 +13,7 @@ import static com.yk.training.sudoku.core.SudokuValidator.SUDOKU_SIZE;
  * <p>
  * https://stackoverflow.com/questions/42320739/sudoku-solver-program
  */
-public class BackTrackingSudokuSolver {
+public class BackTrackingSudokuSolver implements SudokuSolver {
 
     public static final int ZERO = 0;
     public static final int MIN_VALUE = 1;
@@ -26,6 +26,7 @@ public class BackTrackingSudokuSolver {
     protected Step currentStep = null;
     protected int[][] sudoku;
 
+    @Override
     public void solve(final int[][] sudoku) {
         this.sudoku = sudoku;
 
@@ -37,7 +38,7 @@ public class BackTrackingSudokuSolver {
             }
 
             if (currentStep == null) {
-                nextValue = getNextPossibleValue();
+                nextValue = getNextPossibleValue(Set.of());
             } else {
                 nextValue = getNextPossibleValue(currentStep.excludedValues);
             }
@@ -81,22 +82,6 @@ public class BackTrackingSudokuSolver {
         }
 
         return true;
-    }
-
-    /**
-     * @return value to be inserted in current location.
-     * {@code ZERO} - means nothing can be inserted; invalid sudoku.
-     */
-    protected int getNextPossibleValue() {
-        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
-            sudoku[currentRow][currentColumn] = i;
-            if (SudokuValidator.nonZeroElementsInRowColumnBlockUnique(sudoku, currentRow, currentColumn)) {
-                return i;
-            }
-        }
-
-        sudoku[currentRow][currentColumn] = ZERO;
-        return ZERO;
     }
 
     protected int getNextPossibleValue(final Set<Integer> excludedValues) {

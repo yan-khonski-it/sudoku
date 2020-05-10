@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BackTrackingSudokuSolverTest {
@@ -18,5 +19,6 @@ class BackTrackingSudokuSolverTest {
 
         sudokuSolver.solve(sudoku);
         assertTrue(SudokuValidator.isValid(sudoku));
+        assertFalse(MatrixUtils.containsZeros(sudoku));
     }
 }
